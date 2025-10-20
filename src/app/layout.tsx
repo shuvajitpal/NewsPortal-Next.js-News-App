@@ -1,4 +1,3 @@
-// import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Layout/Navbar";
 import AppThemeProvider from "./theme-provider";

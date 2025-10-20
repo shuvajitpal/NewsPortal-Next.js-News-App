@@ -12,10 +12,10 @@ export default function Footer() {
   ];
 
   return (
-    <footer className={`${theme === "dark" ? "bg-white"
-      : "bg-black"} px-6 py-1 transition-all duration-500`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <footer className={`${theme === "dark" ? "bg-white shadow-[0_2px_6px_0_rgba(0,0,0,1)]"
+      : "bg-black shadow-[0_2px_6px_0_rgba(255,255,255,1)]"} px-6 py-2 transition-all duration-500`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           <div>
             <h4 className={`${h4}`}>NewsPortal</h4>
             <ul className={`${ul}`}>
@@ -49,7 +49,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className={`mt-5 pt-6 border-t ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}>
+        <div className={`mt-4 pt-4 border-t ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}>
           <p className="text-sm text-gray-500 dark:text-gray-400">
             © {new Date().getFullYear()} NewsPortal. All rights reserved.
           </p>

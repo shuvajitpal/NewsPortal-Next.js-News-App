@@ -33,9 +33,10 @@ export default function NewsCard({ article }: NewsCardProps) {
           className={
             urlToImage
               ? "w-full h-full object-cover"
-              : "max-w-24 max-h-24 object-contain opacity-70 ml-25 mt-18"
+              : "max-w-30 max-h-30 object-contain opacity-70 ml-26 mt-15"
           }
         />
+
       </div>
       <div className="p-4 flex flex-col flex-grow cursor-pointer -mt-2">
         <h2 className={`text-lg font-semibold ${theme === "dark" ? "text-gray-900" : "dark:text-white"} mb-2 leading-tight line-clamp-2`}>

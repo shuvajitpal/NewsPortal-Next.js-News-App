@@ -32,6 +32,7 @@ export default function useFetchNews(query?: string, category?: string){
         }
         const res = await fetch(url);
         const data = await res.json();
+        console.log(data);
 
         if (data.status === "ok") setArticles(data.articles);
         else throw new Error(data.message || "Failed to fetch news");
