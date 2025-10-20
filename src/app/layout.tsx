@@ -18,8 +18,8 @@ export default function RootLayout({
       <body className="bg-white">
         <AppThemeProvider>
           <Navbar />
-        {children}
-        <Footer />
+          {children}
+          <Footer />
         </AppThemeProvider>
       </body>
     </html>

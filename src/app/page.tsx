@@ -1,5 +1,6 @@
 "use client";
 import Header from "@/components/Layout/Header";
+import SearchBar from "@/components/SearchBar";
 import NewsCard from "@/components/NewsCard";
 import useFetchNews from "@/hooks/useFetchNews";
 import { useState } from "react";
@@ -12,6 +13,7 @@ export default function HomePage(){
   return(
     <div>
       <Header />
+      <SearchBar onSearch={(q) => fetchNewsByQuery(q)} />
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4">
         {articles.length > 0 ? (
           articles.map((article, i) => (
