@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const API_KEY = "7b8e895fc19e42eb81433287a8566bc5";
 
-interface Article{
+interface Article {
   title: string;
   description: string;
   url: string;
@@ -15,10 +15,12 @@ interface Article{
   }
 }
 
-export default function useFetchNews(query?: string, category?: string){
+export default function useFetchNews(query?: string, category?: string, page: number = 1) {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [totalResults, setTotalResults] = useState(0);
+
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -26,26 +28,30 @@ export default function useFetchNews(query?: string, category?: string){
       setError(null);
       try {
         let url;
-        if (query) url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${API_KEY}`;
+        const pageSize = 10;
+        if (query) url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`;
         else {
-          url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
-        if (category) url += `&category=${category}`;
+          url = `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`;
+          if (category) url += `&category=${category}`;
         }
         const res = await fetch(url);
         const data = await res.json();
-        console.log(data);
 
-        if (data.status === "ok") setArticles(data.articles || []);
+        if (data.status === "ok") {
+          setArticles(data.articles || []);
+          setTotalResults(data.totalResults || 0);
+        }
         else throw new Error(data.message || "Failed to fetch news");
       } catch (error) {
         setError("Failed to fetch news");
         setArticles([]);
+        setTotalResults(0);
       } finally {
         setLoading(false);
       }
     };
     fetchNews();
-  }, [query, category]);
+  }, [query, category, page]);
 
-  return { articles, loading, error };
+  return { articles, loading, error, totalResults };
 }

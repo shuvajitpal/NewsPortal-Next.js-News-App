@@ -3,11 +3,22 @@ import Header from "@/components/Layout/Header";
 import SearchBar from "@/components/SearchBar";
 import NewsCard from "@/components/NewsCard";
 import useFetchNews from "@/hooks/useFetchNews";
-import { useState } from "react";
+import Pagination from "@/components/Pagination";
+import { useEffect, useState } from "react";
 
 export default function HomePage(){
   const [query, setQuery] = useState("");
-  const { articles, loading, error } = useFetchNews(query);
+  const [page, setPage] = useState(1);
+
+  useEffect(() =>{
+    setPage(1);
+  },[query])
+  const { articles, totalResults , loading, error } = useFetchNews(query, undefined, page);
+
+  const handlePageChange = (newPage: number) => {
+    setPage(newPage);
+    window.scrollTo({top: 0, behavior:'smooth'})
+  };
 
   return(
     <div>
@@ -22,6 +33,12 @@ export default function HomePage(){
           !loading && <p className="text-center text-gray-500">No news found.</p>
         )}
       </section>
+      <Pagination 
+      currentPage={page}
+      totalResults={totalResults}
+      pageSize={10}
+      onPageChange={handlePageChange}
+      />
     </div>
   )
 }
