@@ -26,14 +26,14 @@ export default function NewsCard({ article }: NewsCardProps) {
 
   return (
     <div className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} rounded-lg shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-500 overflow-hidden flex flex-col h-full`}>
-      <div className="relative w-full h-48 sm:h-56">
+      <div className="relative sm:h-40">
         <img
           src={urlToImage || "/placeholder.png"}
           alt={title}
           className={
             urlToImage
               ? "w-full h-full object-cover"
-              : "max-w-30 max-h-30 object-contain opacity-70 ml-26 mt-15"
+              : "max-w-30 max-h-30 object-contain opacity-70 ml-26 mt-8"
           }
         />
 

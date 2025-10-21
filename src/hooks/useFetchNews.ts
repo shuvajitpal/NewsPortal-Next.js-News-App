@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
-const BASE_URL = "https://newsapi.org/v2/top-headlines?country=us&apiKey=7b8e895fc19e42eb81433287a8566bc5";
+const API_KEY = "7b8e895fc19e42eb81433287a8566bc5";
 
 interface Article{
   title: string;
@@ -24,20 +23,24 @@ export default function useFetchNews(query?: string, category?: string){
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
+      setError(null);
       try {
-        let url = BASE_URL;
-        if (query) url = `https://newsapi.org/v2/everything?q=${query}&apiKey=7b8e895fc19e42eb81433287a8566bc5`;
-        if (category) {
-          url += `&category=${category}`;
+        let url;
+        if (query) url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&apiKey=${API_KEY}`;
+        else {
+          url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+        if (category) url += `&category=${category}`;
         }
         const res = await fetch(url);
         const data = await res.json();
         console.log(data);
 
-        if (data.status === "ok") setArticles(data.articles);
+        if (data.status === "ok") setArticles(data.articles || []);
         else throw new Error(data.message || "Failed to fetch news");
       } catch (error) {
         setError("Failed to fetch news");
+        setArticles([]);
+      } finally {
         setLoading(false);
       }
     };

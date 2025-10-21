@@ -6,14 +6,13 @@ import useFetchNews from "@/hooks/useFetchNews";
 import { useState } from "react";
 
 export default function HomePage(){
-  const { articles, loading } = useFetchNews();
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState("");
+  const { articles, loading, error } = useFetchNews(query);
 
   return(
     <div>
       <Header />
-      <SearchBar onSearch={(q) => fetchNewsByQuery(q)} />
+      <SearchBar onSearch={(q) => setQuery(q)} />
       <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4">
         {articles.length > 0 ? (
           articles.map((article, i) => (
