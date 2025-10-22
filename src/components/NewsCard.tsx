@@ -23,7 +23,7 @@ export default function NewsCard({ article }: NewsCardProps) {
     day: 'numeric'
   });
   const rss = <img src={`${theme === "dark" ? "/rss.png" : "/rss-w.png"}`} alt="logo" width={15} height={10} />
-  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" width={15} height={10} />
+  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" width={12} />
 
   const createSlug = (title: string) => {
     return title
@@ -71,7 +71,7 @@ export default function NewsCard({ article }: NewsCardProps) {
             <div className="flex ">{rss}
               <span className="truncate max-w-[100%]">{source?.name}</span>
             </div>
-            <div className="flex gap-1">{clock} 
+            <div className="flex items-center gap-1">{clock} 
             <span>{formattedDate}</span></div>
           </div>
         </div>

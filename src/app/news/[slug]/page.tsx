@@ -3,6 +3,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import ShareButtons from "@/components/ShareButtons";
 
 interface Article {
   title: string;
@@ -87,15 +88,16 @@ export default function NewsDetailsPage() {
         <p className={`text-lg ${theme === "dark" ? "text-gray-700" : "text-gray-300"} leading-relaxed mb-8 whitespace-pre-wrap`}>
           {article.content}
           <br /><br />
-          *For the full, live article, please visit the original source:*
+          *For the full live article, please visit the original source:*
           <a
             href={article.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} hover:underline flex items-center mt-2`}>
-            🔗 {article.url.split('/')[2]}
+            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"}  flex items-center mt-2`}>
+            🔗<span className="hover:underline">{article.url.split('/')[2]}</span>
           </a>
         </p>
+        <ShareButtons url={article.url} title={article.title} />
       </div>
     </div>
   )
