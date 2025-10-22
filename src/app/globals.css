@@ -13,6 +13,35 @@ body {
   background-color: var(--background-dark);
 }
 
-.round-bg{
+.round-bg {
   @apply p-1 rounded-full transition-colors hover:scale-90;
+}
+
+.animated-rainbow-text {
+  background: linear-gradient(90deg,
+      #ff0000,
+      #ff7f00,
+      #ffff00,
+      #00ff00,
+      #0000ff,
+      #4b0082,
+      #8b00ff,
+      #ff0000,
+      #ff7f00,
+      #ffff00);
+  background-size: 400% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: rainbow 3s linear infinite;
+}
+
+@keyframes rainbow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }

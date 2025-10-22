@@ -23,7 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex items-center justify-center my-4 -mb-4 transition-all duration-500"
+      className="w-full flex items-center justify-center mt-4  transition-all duration-500"
     >
       <div className="flex w-full md:w-1/2 shadow-md rounded-lg overflow-hidden transition-all duration-500">
         <input
