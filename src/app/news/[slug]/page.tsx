@@ -53,12 +53,12 @@ export default function NewsDetailsPage() {
     <div className="max-w-4xl mx-auto px-4 mt-4 mb-10">
       <button
         onClick={() => router.back()}
-        className={`flex items-center hover:underline ${theme === "dark" ? "text-indigo-600 hover:text-indigo-800" : "text-indigo-400 hover:text-indigo-300"} mb-4 font-medium transition-colors`}
+        className={`flex items-center ${theme === "dark" ? "text-indigo-600 hover:text-indigo-800" : "text-indigo-400 hover:text-indigo-300"} mb-4 font-medium transition-colors gap-0.5`}
       >
-        ← Back to News
+        ←<span className="hover:underline"> Back to News</span>
       </button>
 
-      <div className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} rounded-xl shadow-2xl p-6`}>
+      <div className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} rounded-xl shadow-2xl p-6`}>
         <div className="flex justify-between items-start mb-4">
           <h1 className={`text-3xl font-extrabold mb-4 ${theme === "dark" ? "text-gray-900" : "text-white"}`}>
             {article.title}
@@ -93,7 +93,7 @@ export default function NewsDetailsPage() {
             href={article.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"}  flex items-center mt-2`}>
+            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"}  flex items-center mt-2 gap-0.5`}>
             🔗<span className="hover:underline">{article.url.split('/')[2]}</span>
           </a>
         </p>

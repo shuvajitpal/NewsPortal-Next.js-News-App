@@ -15,8 +15,8 @@ export default function Navbar() {
   const bg =`${theme === "dark" ?  " hover:shadow-[0_0_10px_#f472b6]" : " hover:shadow-[0_0_10px_#fef3c7]"}`;
 
   return (
-    <nav className={`${theme === "dark" ? "bg-white/90 text-black"
-      : "bg-gray-900/90 text-white"} sticky top-0 z-50 backdrop-blur-sm flex justify-between items-center px-6 py-1 transition-all duration-500`}>
+    <nav className={`${theme === "dark" ? "bg-white/30 text-black shadow-[0_6px_15px_rgba(0,0,0,0.4)]"
+      : "bg-black/30 text-white shadow-[0_6px_15px_rgba(255,255,255,0.4)]"} sticky top-0 z-50 backdrop-blur-sm flex justify-between items-center px-6 py-1 transition-all duration-500`}>
       <div className="flex items-start -ml-4">{rss}
         <h1 className="text-2xl font-extrabold mt-1.5">NewsPortal</h1>
       </div>

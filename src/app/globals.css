@@ -14,7 +14,7 @@ body {
 }
 
 .round-bg {
-  @apply p-1 rounded-full transition-colors hover:scale-90;
+  @apply p-1 rounded-full hover:scale-90 transition-all duration-200;
 }
 
 .animated-rainbow-text {

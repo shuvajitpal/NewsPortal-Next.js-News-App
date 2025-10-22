@@ -38,7 +38,7 @@ const CategoryList: React.FC<CategoryListProp> = ({ selectedCategory }) => {
           onClick={() => handleClick(cat)}
           className={`px-4 py-0.5 rounded-full transition-colors font-medium ${isSelected(cat)
               ? "bg-blue-600 text-white"
-              : `${theme === "dark" ? "bg-gray-200 text-gray-700 hover:bg-gray-300" : "bg-gray-700 text-gray-300 hover:bg-gray-600"} transition-all duration-500`}`}>
+              : `${theme === "dark" ? "bg-gray-200 text-gray-700 hover:bg-gray-300" : "bg-gray-700 text-gray-300 hover:bg-gray-600"} transition-all duration-200`}`}>
           {cat}
         </button>
       ))}
