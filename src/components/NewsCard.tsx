@@ -2,42 +2,19 @@
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
 import { useEffect, useState } from "react";
-
-interface NewsCardProps {
-  article: {
-    source: { name: string; }
-    title: string;
-    description: string;
-    url: string;
-    urlToImage: string;
-    publishedAt: string;
-    content: string;
-  }
-  onFavouriteToggle?: () => void;
-}
+import { createSlug, formatDate } from "@/lib/utils";
+import { NewsCardProps } from "@/lib/constants";
 
 export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) {
   const { title, description, url, urlToImage, publishedAt, source } = article;
   const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
-  const formattedDate = new Date(publishedAt).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric'
-  });
+
+  const formattedDate = formatDate(publishedAt);
+  const slug = createSlug(title);
+
   const rss = <img src={`${theme === "dark" ? "/rss.png" : "/rss-w.png"}`} alt="logo" width={15} height={10} />
   const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" width={12} />
-
-  const createSlug = (title: string) => {
-    return title
-      .toLowerCase()
-      .replace(/[^a-z0-9 -]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .substring(0, 100);
-  };
-
-  const slug = createSlug(title);
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
@@ -46,21 +23,22 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
 
   const handleFavourite = (e: React.MouseEvent) => {
     e.preventDefault();
-    e.stopPropagation(); 
+    e.stopPropagation();
     const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
     let updated;
-    if (isFav) {updated = favs.filter((a: any) => a.url !== article.url);
+    if (isFav) {
+      updated = favs.filter((a: any) => a.url !== article.url);
       if (onFavouriteToggle) onFavouriteToggle();
     }
     else updated = [...favs, article];
 
     localStorage.setItem("favourite-articles", JSON.stringify(updated));
     setIsFav(!isFav);
+    window.dispatchEvent(new Event('favouritesUpdated'));
   };
 
   const handleClick = () => {
     localStorage.setItem(`article_${slug}`, JSON.stringify(article));
-    const stored = localStorage.getItem(`article_${slug}`);
   };
 
   return (

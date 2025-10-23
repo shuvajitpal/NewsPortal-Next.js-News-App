@@ -1,16 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useTheme } from "@/context/ThemeContext";
-
-const categories = [
-  "General",
-  "Business",
-  "Technology",
-  "Science",
-  "Health",
-  "Sports",
-  "Entertainment",
-];
+import { Categories } from "@/lib/constants";
 
 interface CategoryListProp {
   selectedCategory?: string;
@@ -32,7 +23,7 @@ const CategoryList: React.FC<CategoryListProp> = ({ selectedCategory }) => {
 
   return (
     <div className="flex flex-wrap gap-2 mt-4 -mb-5 ml-2">
-      {categories.map((cat) => (
+      {Categories.map((cat) => (
         <button
           key={cat}
           onClick={() => handleClick(cat)}

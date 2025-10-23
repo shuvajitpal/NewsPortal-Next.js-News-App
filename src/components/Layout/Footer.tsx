@@ -1,15 +1,11 @@
 "use client";
-
 import { useTheme } from "@/context/ThemeContext";
+import { socialMediaIcons } from "@/lib/constants";
 
 export default function Footer() {
   const { theme } = useTheme();
   const h4 = `${theme === "dark" ? "text-gray-900" : "text-white"} mb-3 text-md font-semibold transition-colors`;
   const ul = `${theme === "dark" ? "text-gray-700" : "text-gray-400"} space-y-2 text-sm`;
-  const icons = [
-    "/github.png", "/linkedin.png", "/twitter.png", "/youtube.png",
-    "/facebook.png", "/instagram.png"
-  ];
 
   return (
     <footer className={`${theme === "dark"
@@ -45,7 +41,7 @@ export default function Footer() {
           <div>
             <h4 className={`${h4}`}>Follow Us</h4>
             <div className="flex flex-wrap gap-2 max-w-[120px]">
-              {icons.map((src, i) => (
+              {socialMediaIcons.map((src, i) => (
                 <img key={i} src={src} alt="social" width={22} height={22} className="cursor-pointer hover:scale-120 transition-transform" />
               ))}
             </div>

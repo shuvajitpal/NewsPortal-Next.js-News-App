@@ -1,19 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-
-const API_KEY = "7b8e895fc19e42eb81433287a8566bc5";
-
-interface Article {
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-  publishedAt: string;
-  content: string;
-  source: {
-    name: string;
-  }
-}
+import { newsApi } from "@/lib/api";
+import { Article } from "@/lib/constants";
 
 export default function useFetchNews(query?: string, category?: string, page: number = 1) {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -21,27 +9,14 @@ export default function useFetchNews(query?: string, category?: string, page: nu
   const [error, setError] = useState<string | null>(null);
   const [totalResults, setTotalResults] = useState(0);
 
-
   useEffect(() => {
     const fetchNews = async () => {
       setLoading(true);
       setError(null);
       try {
-        let url;
-        const pageSize = 10;
-        if (query) url = `https://newsapi.org/v2/everything?q=${encodeURIComponent(query)}&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`;
-        else {
-          url = `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=${pageSize}&apiKey=${API_KEY}`;
-          if (category) url += `&category=${category}`;
-        }
-        const res = await fetch(url);
-        const data = await res.json();
-
-        if (data.status === "ok") {
-          setArticles(data.articles || []);
-          setTotalResults(data.totalResults || 0);
-        }
-        else throw new Error(data.message || "Failed to fetch news");
+        const data = await newsApi.fetchNews(query, category, page);
+        setArticles(data.articles);
+        setTotalResults(data.totalResults);
       } catch (error) {
         setError("Failed to fetch news");
         setArticles([]);
