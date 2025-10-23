@@ -1,11 +1,17 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
 import { socialMediaIcons } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
   const { theme } = useTheme();
+  const router = useRouter();
   const h4 = `${theme === "dark" ? "text-gray-900" : "text-white"} foh4`;
   const ul = `${theme === "dark" ? "text-gray-700" : "text-gray-400"} ful`;
+
+  const handleCategory = (category: string) => {
+    router.push(`/category/${category.toLowerCase()}`);
+  };
 
   return (
     <footer className={`${theme === "dark" ? 'fbg-l' : 'fbg-b'} fbg`}>
@@ -14,17 +20,33 @@ export default function Footer() {
           <div>
             <h4 className={`${h4}`}>NewsPortal</h4>
             <ul className={`${ul}`}>
-              <li className="fl">About Us</li>
-              <li className="fl">API Sources</li>
-              <li className="fl">Privacy Policy</li>
+              <li className="fl ">About Us</li>
+              <li className="fl ">API Sources</li>
+              <li className="fl ">Privacy Policy</li>
             </ul>
           </div>
           <div>
             <h4 className={`${h4}`}>Top Categories</h4>
             <ul className={`${ul}`}>
-              <li><a href="#" className="fl">Technology</a></li>
-              <li><a href="#" className="fl">Business</a></li>
-              <li><a href="#" className="fl">Sports</a></li>
+              <li><button 
+                  onClick={() => handleCategory("technology")} 
+                  className="flb"
+                >Technology
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleCategory("business")} 
+                  className="flb"
+                >Business
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => handleCategory("sports")} 
+                  className="flb"
+                >Sports
+                </button></li>
             </ul>
           </div>
           <div>

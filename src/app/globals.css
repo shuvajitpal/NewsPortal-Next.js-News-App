@@ -258,6 +258,10 @@ body {
   @apply hover:text-indigo-600 transition-colors;
 }
 
+.flb {
+  @apply hover:text-indigo-500 hover:scale-110 transition-all duration-200 active:scale-90;
+}
+
 .fig {
   @apply flex flex-wrap gap-2 max-w-[120px];
 }
@@ -287,7 +291,7 @@ body {
 }
 
 .nvw-l {
-  @apply bg-white/30 text-black shadow-[0_6px_0_15px_rgba(0,0,0,0.4)];
+  @apply bg-white/30 text-black shadow-[0_6px_15px_0_rgba(0,0,0,0.4)];
 }
 
 .nvrss {
