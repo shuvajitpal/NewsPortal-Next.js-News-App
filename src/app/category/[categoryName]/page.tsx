@@ -39,7 +39,7 @@ export default function CategoryPage() {
 
       {category && (
         <div className="text-center mt-6">
-          <h1 className="text-2xl font-bold animated-rainbow-text capitalize">
+          <h1 className=" animated-rainbow-text ct-h">
             {category} News
           </h1>
         </div>
@@ -49,11 +49,11 @@ export default function CategoryPage() {
       {error && <StatusMessage type="error" message={error} />}
 
       {!loading && !error && (
-        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
+        <section className="ct-ns">
           {articles.length > 0 ? (
             articles.map((article, i) => <NewsCard key={i} article={article} />)
           ) : (
-            <p className="text-center text-gray-500 col-span-full">No news found.</p>
+            <p className="ct-nn">No news found.</p>
           )}
         </section>
       )}

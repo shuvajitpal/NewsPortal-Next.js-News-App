@@ -40,20 +40,20 @@ export default function FavouritePage() {
 
   return (
     <div>
-      <h1 className={`text-2xl font-semibold text-center mt-6 ${theme === "dark" ? "text-black" : "text-white"}`}>My Favourites</h1>
+      <h1 className={`fv-h ${theme === "dark" ? "text-black" : "text-white"}`}>My Favourites</h1>
 
       {favourites.length === 0 ? (
         <div>
-          <p className="text-center text-gray-500 mt-4 mb-4">
+          <p className="fv-n">
             You haven’t saved any Articles yet.
 
           </p>
-          <button onClick={handleBack} className="mt-2 mx-auto block px-5 py-2 bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-semibold rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300">
+          <button onClick={handleBack} className="fb-bk">
             ← Back to News
           </button>
         </div>
       ) : (
-        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-1 mb-4 p-4">
+        <section className="fv-s">
           {favourites.map((article, i) => (
             <div key={i} className="relative">
               <NewsCard key={i} article={article} onFavouriteToggle={() => removeFav(article.url)} />

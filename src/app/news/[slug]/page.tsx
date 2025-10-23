@@ -71,22 +71,22 @@ export default function NewsDetailsPage() {
   });
 
   return (
-    <div className="max-w-4xl mx-auto px-4 mt-4 mb-10">
+    <div className="dm">
       <button
         onClick={() => router.back()}
-        className={`flex items-center ${theme === "dark" ? "text-indigo-600 hover:text-indigo-800" : "text-indigo-400 hover:text-indigo-300"} mb-4 font-medium transition-colors gap-0.5`}
+        className={`${theme === "dark" ? "d-bk-l" : "d-bk-b"} d-bk`}
       >
         ←<span className="hover:underline"> Back to News</span>
       </button>
 
-      <div className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} relative rounded-xl shadow-2xl p-6`}>
-        <div className="flex justify-between items-start -mb-1">
-          <h1 className={`text-3xl font-extrabold mb-4 ${theme === "dark" ? "text-gray-900" : "text-white"}`}>
+      <div className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} d-wm`}>
+        <div className="d-hfv">
+          <h1 className={`d-h ${theme === "dark" ? "text-gray-900" : "text-white"}`}>
             {article.title}
           </h1>
           <button
             onClick={handleFavourite}
-            className={`absolute top-2 right-2 p-2 ${theme === "dark" ? "bg-black/20" : "bg-white/20"} rounded-full backdrop-blur-sm transition-colors shadow-lg`}
+            className={`${theme === "dark" ? "bg-black/20" : "bg-white/20"} d-fv`}
           ><img
               src={isFav ? "/fill-heart.png" : theme === "dark"
                 ? "/heart-l.png"
@@ -94,39 +94,39 @@ export default function NewsDetailsPage() {
               alt={isFav ? "Remove Favorite" : "Add Favorite"}
               width={16}
               height={16}
-              className="hover:scale-120 active:scale-90 transition-all duration-300"
+              className="d-fvi"
             /></button>
         </div>
-        <div className={`text-sm border-b ${theme === "dark" ? "text-gray-500 border-gray-700" : "text-gray-400 border-gray-200"} pb-4 mb-6 space-y-1 md:space-y-0 md:flex md:justify-between flex-col`}>
-          <span className="flex font-semibold items-center space-x-1">{author}
+        <div className={`${theme === "dark" ? "d-asd-l" : "d-asd-b"} d-asd`}>
+          <span className="d-athr">{author}
             {article.author && (
               <span>{article.author}</span>
             )}
           </span>
-          <span className="flex items-center space-x-1 -ml-0.5">{rss}
+          <span className="d-src">{rss}
             <span className="">Source: {article.source?.name}</span>
           </span>
-          <span className="flex items-center space-x-1">{calender}
+          <span className="d-cl">{calender}
             <span>Published: {formattedDate}</span></span>
         </div>
-        <div className={`mb-2 rounded-lg overflow-hidden ${article.urlToImage ? "w-full aspect-video" : "h-15 flex items-center justify-center"}`}>
+        <div className={`d-imgw ${article.urlToImage ? "d-imgy" : "d-imgn"}`}>
           {article.urlToImage ? (
             <img
               src={article.urlToImage}
               alt={article.title}
-              className="w-full h-full object-cover"
+              className=".d-img"
             />
           ) : (
-            <div className="w-full h-full flex items-center justify-center">
+            <div className="d-imgnw">
               <img
                 src="/placeholder.png"
                 alt="No image available"
-                className="max-w-16 max-h-16 object-contain opacity-40"
+                className="d-nimg"
               />
             </div>
           )}
         </div>
-        <p className={`text-lg ${theme === "dark" ? "text-gray-700" : "text-gray-300"} leading-relaxed mb-8 whitespace-pre-wrap`}>
+        <p className={`${theme === "dark" ? "text-gray-700" : "text-gray-300"} d-ct`}>
           {article.content}
           <br /><br />
           *For the Full Live Article, Please Visit the Original Source:*
@@ -134,7 +134,7 @@ export default function NewsDetailsPage() {
             href={article.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"}  flex items-center mt-2 gap-0.5`}>
+            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} d-lk`}>
             🔗<span className="hover:underline">{article.url.split('/')[2]}</span>
           </a>
         </p>

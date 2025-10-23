@@ -20,7 +20,7 @@ export default function StatusMessage({ type, message }: StatusMessageProps) {
   const altText = type === 'loading' ? "Loading" : "Error";
 
   return(
-    <div className="flex flex-col items-center justify-center mt-20 mb-10 text-2xl">
+    <div className="sm">
       <Image
         src={imageSrc}
         alt={altText}

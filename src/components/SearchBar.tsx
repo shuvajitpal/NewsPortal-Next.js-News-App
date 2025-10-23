@@ -23,19 +23,19 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full flex items-center justify-center mt-4  transition-all duration-500"
+      className="sbw"
     >
-      <div className="flex w-full md:w-1/2 shadow-md rounded-lg overflow-hidden transition-all duration-500">
+      <div className="sb">
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search news..."
-          className={`flex-1 p-3 pl-4 border  focus:ring-indigo-500 focus:border-indigo-500 transition-shadow outline-none ${theme === "dark" ? "border-gray-300 bg-gray-100" : "border-gray-700 bg-gray-700 text-white transition-all duration-500"}`}
+          className={`sbi ${theme === "dark" ? "sbi-l" : "sbi-b"}`}
         />
         <button
           type="submit"
-          className={`px-6 py-3 text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-500 font-medium whitespace-nowrap`}
+          className={`sbs`}
         >
           Search
         </button>

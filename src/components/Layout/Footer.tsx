@@ -4,51 +4,48 @@ import { socialMediaIcons } from "@/lib/constants";
 
 export default function Footer() {
   const { theme } = useTheme();
-  const h4 = `${theme === "dark" ? "text-gray-900" : "text-white"} mb-3 text-md font-semibold transition-colors`;
-  const ul = `${theme === "dark" ? "text-gray-700" : "text-gray-400"} space-y-2 text-sm`;
+  const h4 = `${theme === "dark" ? "text-gray-900" : "text-white"} foh4`;
+  const ul = `${theme === "dark" ? "text-gray-700" : "text-gray-400"} ful`;
 
   return (
-    <footer className={`${theme === "dark"
-        ? 'bg-white shadow-[0_-6px_15px_rgba(0,0,0,0.4)]'
-        : 'bg-black shadow-[0_-6px_15px_rgba(255,255,255,0.4)]'
-      } px-6 py-2 transition-all duration-500`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <footer className={`${theme === "dark" ? 'fbg-l' : 'fbg-b'} fbg`}>
+      <div className="fp">
+        <div className="fg">
           <div>
             <h4 className={`${h4}`}>NewsPortal</h4>
             <ul className={`${ul}`}>
-              <li className="hover:text-indigo-600 transition-colors">About Us</li>
-              <li className="hover:text-indigo-600 transition-colors">API Sources</li>
-              <li className="hover:text-indigo-600 transition-colors">Privacy Policy</li>
+              <li className="fl">About Us</li>
+              <li className="fl">API Sources</li>
+              <li className="fl">Privacy Policy</li>
             </ul>
           </div>
           <div>
             <h4 className={`${h4}`}>Top Categories</h4>
             <ul className={`${ul}`}>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Technology</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Business</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Sports</a></li>
+              <li><a href="#" className="fl">Technology</a></li>
+              <li><a href="#" className="fl">Business</a></li>
+              <li><a href="#" className="fl">Sports</a></li>
             </ul>
           </div>
           <div>
             <h4 className={`${h4}`}>Support</h4>
             <ul className={`${ul}`}>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Contact</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">FAQ</a></li>
-              <li><a href="#" className="hover:text-indigo-600 transition-colors">Report Bug</a></li>
+              <li><a href="#" className="fl">Contact</a></li>
+              <li><a href="#" className="fl">FAQ</a></li>
+              <li><a href="#" className="fl">Report Bug</a></li>
             </ul>
           </div>
           <div>
             <h4 className={`${h4}`}>Follow Us</h4>
-            <div className="flex flex-wrap gap-2 max-w-[120px]">
+            <div className="fig">
               {socialMediaIcons.map((src, i) => (
-                <img key={i} src={src} alt="social" width={22} height={22} className="cursor-pointer hover:scale-120 transition-transform" />
+                <img key={i} src={src} alt="social" width={22} height={22} className="fi"/>
               ))}
             </div>
           </div>
         </div>
-        <div className={`mt-4 pt-4 border-t ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}>
-          <p className="text-sm text-gray-500 dark:text-gray-400">
+        <div className={`fmb ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}>
+          <p className={`text-sm ${theme === "dark" ? "text-gray-700" : "text-gray-300"}`}>
             © {new Date().getFullYear()} NewsPortal. All rights reserved.
           </p>
         </div>

@@ -45,3 +45,403 @@ body {
     background-position: 100% 50%;
   }
 }
+
+.card {
+  @apply rounded-lg shadow-lg hover:shadow-lg transition-all duration-500 overflow-hidden flex flex-col h-full hover:scale-105;
+}
+
+.card-content {
+  @apply p-4 flex flex-col flex-grow cursor-pointer -mt-2;
+}
+
+.card-title {
+  @apply text-lg font-semibold mb-2 leading-tight line-clamp-2 hover:scale-102 transition-all duration-200;
+}
+
+.card-desc {
+  @apply text-sm line-clamp-2 mb-2 hover:scale-101 transition-all duration-200;
+}
+
+.card-meta {
+  @apply flex justify-between items-center text-xs mt-auto text-gray-500 pt-2 border-t;
+}
+
+.cd-img {
+  @apply flex hover:scale-102 transition-all duration-200;
+}
+
+.cd-fv {
+  @apply absolute top-1 right-1 p-2 bg-black/20 rounded-full backdrop-blur-sm transition-colors shadow-lg;
+}
+
+.fv-hv {
+  @apply hover:scale-120 active:scale-90 transition-all duration-300;
+}
+
+.cd-mimg {
+  @apply max-w-20 max-h-20 object-contain opacity-50;
+}
+
+.cd-wimg {
+  @apply relative sm:h-40 hover:scale-102 transition-all duration-200;
+}
+
+.ct-h {
+  @apply text-2xl font-bold capitalize;
+}
+
+.ct-ns {
+  @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4;
+}
+
+.ct-nn {
+  @apply text-center text-gray-500 col-span-full;
+}
+
+.fv-h {
+  @apply text-2xl font-semibold text-center mt-6;
+}
+
+.fv-n {
+  @apply text-center text-gray-500 mt-4 mb-4;
+}
+
+.fb-bk {
+  @apply mt-2 mx-auto block px-5 py-2 bg-gradient-to-r from-indigo-500 to-pink-500 text-white font-semibold rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300;
+}
+
+.fv-s {
+  @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-1 mb-4 p-4;
+}
+
+.dm {
+  @apply max-w-4xl mx-auto px-4 mt-4 mb-10;
+}
+
+.d-bk {
+  @apply flex items-center mb-4 font-medium transition-colors gap-0.5;
+}
+
+.d-bk-b {
+  @apply text-indigo-400 hover:text-indigo-300;
+}
+
+.d-bk-l {
+  @apply text-indigo-600 hover:text-indigo-800;
+}
+
+.d-wm {
+  @apply relative rounded-xl shadow-2xl p-6;
+}
+
+.d-hfv {
+  @apply flex justify-between items-start -mb-1;
+}
+
+.d-h {
+  @apply text-3xl font-extrabold mb-4;
+}
+
+.d-fv {
+  @apply absolute top-2 right-2 p-2 rounded-full backdrop-blur-sm transition-colors shadow-lg;
+}
+
+.d-fvi {
+  @apply hover:scale-120 active:scale-90 transition-all duration-300;
+}
+
+.d-asd {
+  @apply text-sm border-b pb-4 mb-6 space-y-1 md:space-y-0 md:flex md:justify-between flex-col;
+}
+
+.d-asd-b {
+  @apply text-gray-400 border-gray-200;
+}
+
+.d-asd-l {
+  @apply text-gray-500 border-gray-700;
+}
+
+.d-athr {
+  @apply flex font-semibold items-center space-x-1;
+}
+
+.d-src {
+  @apply flex items-center space-x-1 -ml-0.5;
+}
+
+.d-cl {
+  @apply flex items-center space-x-1;
+}
+
+.d-imgw {
+  @apply mb-2 rounded-lg overflow-hidden;
+}
+
+.d-imgy {
+  @apply w-full aspect-video;
+}
+
+.d-imgn {
+  @apply h-15 flex items-center justify-center;
+}
+
+.d-img {
+  @apply w-full h-full object-cover;
+}
+
+.d-imgnw {
+  @apply w-full h-full flex items-center justify-center;
+}
+
+.d-nimg {
+  @apply max-w-16 max-h-16 object-contain opacity-40;
+}
+
+.d-ct {
+  @apply text-lg leading-relaxed mb-8 whitespace-pre-wrap;
+}
+
+.d-lk {
+  @apply flex items-center mt-2 gap-0.5;
+}
+
+.bd {
+  @apply flex flex-col min-h-screen;
+}
+
+.hhw {
+  @apply text-center mt-8 -mb-6;
+}
+
+.hh {
+  @apply text-2xl font-bold;
+}
+
+.ha {
+  @apply grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4;
+}
+
+.hn {
+  @apply text-center text-gray-500 col-span-full;
+}
+
+.foh4 {
+  @apply mb-3 text-shadow-md font-semibold transition-colors;
+}
+
+.ful {
+  @apply space-y-2 text-sm;
+}
+
+.fbg {
+  @apply px-6 py-2 transition-all duration-500;
+}
+
+.fbg-l {
+  @apply bg-white shadow-[0_-6px_15px_0_rgba(0,0,0,0.4)];
+}
+
+.fbg-b {
+  @apply bg-black shadow-[0_-6px_15px_0_rgba(255,255,255,0.4)];
+}
+
+.fp {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4;
+}
+
+.fg {
+  @apply grid grid-cols-2 md:grid-cols-4 gap-6;
+}
+
+.fl {
+  @apply hover:text-indigo-600 transition-colors;
+}
+
+.fig {
+  @apply flex flex-wrap gap-2 max-w-[120px];
+}
+
+.fi {
+  @apply cursor-pointer hover:scale-120 transition-transform;
+}
+
+.fmb {
+  @apply mt-4 pt-4 border-t;
+}
+
+.hdh {
+  @apply bg-indigo-700 text-white shadow-xl;
+}
+
+.hd {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1 text-sm font-medium flex items-center justify-center shadow-gray-500;
+}
+
+.nvw {
+  @apply sticky top-0 z-50 backdrop-blur-sm flex justify-between items-center px-6 py-1 transition-all duration-500;
+}
+
+.nvw-b {
+  @apply bg-black/30 text-white shadow-[0_6px_15px_0_rgba(255,255,255,0.4)];
+}
+
+.nvw-l {
+  @apply bg-white/30 text-black shadow-[0_6px_0_15px_rgba(0,0,0,0.4)];
+}
+
+.nvrss {
+  @apply flex items-start -ml-4;
+}
+
+.nvh {
+  @apply text-2xl font-extrabold mt-1.5;
+}
+
+.nvhi {
+  @apply flex items-end gap-6;
+}
+
+.nvfv {
+  @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center;
+}
+
+.ctw {
+  @apply flex flex-wrap gap-2 mt-4 -mb-5 ml-2;
+}
+
+.ctb {
+  @apply px-4 py-0.5 rounded-full font-medium transition-all duration-200;
+}
+
+.ctbs {
+  @apply bg-blue-600 text-white;
+}
+
+.ctb-b {
+  @apply bg-gray-700 text-gray-300 hover:bg-gray-600;
+}
+
+.ctb-l {
+  @apply bg-gray-200 text-gray-700 hover:bg-gray-300;
+}
+
+.nci {
+  @apply w-full h-full object-cover;
+}
+
+.ncin {
+  @apply w-full h-full flex items-center justify-center;
+}
+
+.pgbp {
+  @apply px-2 py-1 rounded-md text-sm font-medium transition-all duration-200;
+}
+
+.pgbp-l {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400;
+}
+
+.pgbp-b {
+  @apply bg-gray-700 text-white hover:bg-gray-600 disabled:bg-gray-800 disabled:text-gray-500;
+}
+
+.pgnw {
+  @apply flex items-center gap-1;
+}
+
+.pgnb {
+  @apply min-w-[30px] h-5 flex items-center justify-center rounded-md text-sm font-medium transition-all duration-200;
+}
+
+.pghnbc {
+  @apply bg-indigo-600 text-white;
+}
+
+.pgnbcn {
+  @apply text-gray-500 cursor-default;
+}
+
+.pgnb-l {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
+}
+
+.pgnb-b {
+  @apply bg-gray-700 text-white hover:bg-gray-600;
+}
+
+.pgn {
+  @apply px-2 py-1 rounded-md text-sm font-medium transition-all duration-200;
+}
+
+.pgn-b {
+  @apply bg-gray-700 text-white hover:bg-gray-600 disabled:bg-gray-800 disabled:text-gray-500;
+}
+
+.pgn-l {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400;
+}
+
+.pgs {
+  @apply text-sm -mt-2 mb-2;
+}
+
+.sbw {
+  @apply w-full flex items-center justify-center mt-4 transition-all duration-500;
+}
+
+.sb {
+  @apply flex w-full md:w-1/2 shadow-md rounded-lg overflow-hidden transition-all duration-500;
+}
+
+.sbi {
+  @apply flex-1 p-3 pl-4 border focus:ring-indigo-500 focus:border-indigo-500 transition-shadow outline-none;
+}
+
+.sbi-l {
+  @apply border-gray-300 bg-gray-100;
+}
+
+.sbi-b {
+  @apply border-gray-700 bg-gray-700 text-white transition-all duration-500;
+}
+
+.sbs {
+  @apply px-6 py-3 text-white bg-indigo-600 hover:bg-indigo-700 transition-all duration-500 font-medium whitespace-nowrap;
+}
+
+.shw {
+  @apply border-t border-gray-500 pt-4 flex flex-wrap gap-2;
+}
+
+.shs {
+  @apply text-sm font-semibold mt-0.5;
+}
+
+.sht {
+  @apply flex items-center px-4 py-0.5 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600 transition-colors shadow-md gap-1 shadow-white/40;
+}
+
+.shl {
+  @apply flex items-center px-4 py-0.5 bg-blue-800 text-white rounded-full text-sm hover:bg-blue-900 transition-colors shadow-md gap-1 shadow-white/40;
+}
+
+.shw {
+  @apply flex items-center px-4 py-0.5 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors shadow-md gap-1 shadow-white/60;
+}
+
+.shf {
+  @apply flex items-center px-4 py-0.5 bg-blue-700 text-white rounded-full text-sm hover:bg-blue-800 transition-colors shadow-md gap-1 shadow-white/40;
+}
+
+.shc {
+  @apply flex items-center px-4 py-0.5 bg-gray-500 text-white rounded-full text-sm hover:bg-gray-400 transition-colors shadow-md gap-1 shadow-white/20;
+}
+
+.shcd {
+  @apply text-sm text-green-500 mt-0.5;
+}
+
+.sm {
+  @apply flex flex-col items-center justify-center mt-20 mb-10 text-2xl;
+}

@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="flex flex-col min-h-screen">
+      <body className="bd">
         <AppThemeProvider>
           <Navbar />
           <main className="flex-grow">

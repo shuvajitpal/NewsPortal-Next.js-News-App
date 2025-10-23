@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const [favouriteCount, setFavouriteCount] = useState(0);
-  
+
   const { theme, toggleTheme } = useTheme();
 
   const pathname = usePathname();
@@ -45,12 +45,12 @@ export default function Navbar() {
   const isHomePage = pathname === '/';
 
   return (
-    <nav className={`${theme === "dark" ? "bg-white/30 text-black shadow-[0_6px_15px_rgba(0,0,0,0.4)]"
-      : "bg-black/30 text-white shadow-[0_6px_15px_rgba(255,255,255,0.4)]"} sticky top-0 z-50 backdrop-blur-sm flex justify-between items-center px-6 py-1 transition-all duration-500`}>
-      <div className="flex items-start -ml-4">{rss}
-        <h1 className="text-2xl font-extrabold mt-1.5">NewsPortal</h1>
+    <nav className={`${theme === "dark" ? "nvw-l"
+      : "nvw-b"} nvw`}>
+      <div className="nvrss">{rss}
+        <h1 className="nvh">NewsPortal</h1>
       </div>
-      <div className="flex items-end gap-6">
+      <div className="nvhi">
         {!isHomePage && (
           <Link href="/" className={`round-bg ${bg}`}>{home}</Link>
         )}
@@ -58,7 +58,7 @@ export default function Navbar() {
           <Link href="/favourites" className={`round-bg ${bg} relative`}>
             {favourite}
             {favouriteCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+              <span className="nvfv">
                 {favouriteCount > 99 ? '99+' : favouriteCount}
               </span>
             )}

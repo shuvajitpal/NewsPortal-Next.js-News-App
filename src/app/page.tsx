@@ -31,8 +31,8 @@ export default function HomePage() {
       <Header />
       <SearchBar onSearch={(q) => setQuery(q)} />
       <CategoryList />
-      <div className="text-center mt-8 -mb-6">
-        <h1 className={`text-2xl font-bold ${theme === "dark" ? "text-gray-800" : "dark:text-white"}`}>
+      <div className="hhw">
+        <h1 className={`hh ${theme === "dark" ? "text-gray-800" : "dark:text-white"}`}>
           Top Headlines
         </h1>
       </div>
@@ -41,13 +41,13 @@ export default function HomePage() {
       {error && <StatusMessage type="error" message={error} />}
 
       {!loading && !error && (
-        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4">
+        <section className="ha">
           {articles.length > 0 ? (
             articles.map((article, i) => (
               <NewsCard key={i} article={article} />
             ))
           ) : (
-            <p className="text-center text-gray-500 col-span-full">No news found.</p>
+            <p className="hn">No news found.</p>
           )}
         </section>
       )}

@@ -9,7 +9,7 @@ interface CategoryListProp {
 
 const CategoryList: React.FC<CategoryListProp> = ({ selectedCategory }) => {
   const {theme} = useTheme();
-  
+
   const router = useRouter();
 
   const handleClick = (category: string) => {
@@ -23,14 +23,12 @@ const CategoryList: React.FC<CategoryListProp> = ({ selectedCategory }) => {
   }
 
   return (
-    <div className="flex flex-wrap gap-2 mt-4 -mb-5 ml-2">
+    <div className="ctw">
       {Categories.map((cat) => (
         <button
           key={cat}
           onClick={() => handleClick(cat)}
-          className={`px-4 py-0.5 rounded-full transition-colors font-medium ${isSelected(cat)
-              ? "bg-blue-600 text-white"
-              : `${theme === "dark" ? "bg-gray-200 text-gray-700 hover:bg-gray-300" : "bg-gray-700 text-gray-300 hover:bg-gray-600"} transition-all duration-200`}`}>
+          className={`ctb ${isSelected(cat) ? "ctbs" : `${theme === "dark" ? "ctb-l" : "ctb-b"}`}`}>
           {cat}
         </button>
       ))}
