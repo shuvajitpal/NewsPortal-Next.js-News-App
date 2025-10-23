@@ -8,8 +8,9 @@ interface CategoryListProp {
 }
 
 const CategoryList: React.FC<CategoryListProp> = ({ selectedCategory }) => {
-  const router = useRouter();
   const {theme} = useTheme();
+  
+  const router = useRouter();
 
   const handleClick = (category: string) => {
     if (selectedCategory === category || category === "General") router.push("/");

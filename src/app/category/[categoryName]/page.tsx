@@ -1,5 +1,4 @@
 "use client";
-import { useTheme } from "@/context/ThemeContext";
 import { useParams } from "next/navigation";
 import Header from "@/components/Layout/Header";
 import NewsCard from "@/components/NewsCard";
@@ -7,9 +6,9 @@ import CategoryList from "@/components/CategoryList";
 import useFetchNews from "@/hooks/useFetchNews";
 import Pagination from "@/components/Pagination";
 import { useEffect, useState } from "react";
+import StatusMessage from "@/components/StatusMessage";
 
-export default function CategoryPage(){
-  const { theme } = useTheme();
+export default function CategoryPage() {
   const params = useParams();
   const categoryParam = params.categoryName;
   const category = Array.isArray(categoryParam) ? categoryParam[0] : categoryParam;
@@ -17,11 +16,11 @@ export default function CategoryPage(){
 
   const [page, setPage] = useState(1);
 
-  const { articles, loading, error, totalResults} = useFetchNews(undefined, formattedCategory, page);
+  const { articles, loading, error, totalResults } = useFetchNews(undefined, formattedCategory, page);
 
-  useEffect(() =>{
+  useEffect(() => {
     setPage(1);
-  },[formattedCategory])
+  }, [formattedCategory])
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -31,9 +30,9 @@ export default function CategoryPage(){
   useEffect(() => {
     console.log("Current category:", formattedCategory);
     console.log("Articles:", articles);
-  },[formattedCategory, articles])
+  }, [formattedCategory, articles])
 
-  return(
+  return (
     <div>
       <Header />
       <CategoryList selectedCategory={category} />
@@ -46,18 +45,20 @@ export default function CategoryPage(){
         </div>
       )}
 
-      {loading && <p className="text-center mt-4">Loading...</p>}
-      {error && <p className="text-center text-red-500">{error}</p>}
+      {loading && <StatusMessage type="loading" />}
+      {error && <StatusMessage type="error" message={error} />}
 
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
-        {articles.length > 0 ? (
-          articles.map((article, i) => <NewsCard key={i} article={article} />)
-        ) : (
-          !loading && <p className="text-center text-gray-500">No news found.</p>
-        )}
-      </section>
+      {!loading && !error && (
+        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
+          {articles.length > 0 ? (
+            articles.map((article, i) => <NewsCard key={i} article={article} />)
+          ) : (
+            <p className="text-center text-gray-500 col-span-full">No news found.</p>
+          )}
+        </section>
+      )}
       {!loading && !error && totalResults > 10 && (
-        <Pagination 
+        <Pagination
           currentPage={page}
           totalResults={totalResults}
           pageSize={9}

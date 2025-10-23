@@ -3,6 +3,7 @@ import NewsCard from "@/components/NewsCard";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { useRouter } from "next/navigation";
+import StatusMessage from "@/components/StatusMessage";
 
 interface Article {
   source: { name: string; }
@@ -18,6 +19,7 @@ export default function FavouritePage() {
   const [favourites, setFavourites] = useState<Article[]>([]);
   const { theme } = useTheme();
   const router = useRouter();
+  const [error] = useState<string | null>(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("favourite-articles");
@@ -33,6 +35,8 @@ export default function FavouritePage() {
   const handleBack = () => {
     router.back();
   };
+
+  if (error) return <StatusMessage type="error" message={error} />;
 
   return (
     <div>

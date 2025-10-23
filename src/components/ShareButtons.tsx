@@ -10,7 +10,8 @@ interface ShareButtonProps {
 
 export default function ShareButtons({ url, title }: ShareButtonProps) {
   const [copied, setCopied] = useState(false);
-
+  const { theme } = useTheme();
+  
   const handleCopy = async () => {
     await navigator.clipboard.writeText(url);
     setCopied(true);
@@ -19,13 +20,12 @@ export default function ShareButtons({ url, title }: ShareButtonProps) {
 
   const ecoUrl = encodeURIComponent(url);
   const ecoTitle = encodeURIComponent(title);
-  const { theme } = useTheme();
 
   const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${ecoUrl}`;
   const twitterShareUrl = `https://twitter.com/intent/tweet?url=${ecoUrl}&text=${ecoTitle}&via=NewsPortal`;
   const whatsappShareUrl = `https://api.whatsapp.com/send?text=${ecoTitle}%20${ecoUrl}`;
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${ecoUrl}&quote=${ecoTitle}`;
-  
+
   const wp = <Image src="/wpw.png" alt="logo" width={14} height={20} />
   const fb = <Image src="/fbw.png" alt="logo" width={14} height={20} />
   const lin = <Image src="/inw.png" alt="logo" width={14} height={20} />
@@ -64,7 +64,7 @@ export default function ShareButtons({ url, title }: ShareButtonProps) {
       ><span>{fb}</span>Facebook
       </a>
       <button onClick={handleCopy} className="flex items-center px-4 py-0.5 bg-gray-500 text-white rounded-full text-sm hover:bg-gray-400 transition-colors shadow-md gap-1 shadow-white/20">
-       <span>{cp}</span> Copy
+        <span>{cp}</span> Copy
       </button >
       {copied && <span className="text-sm text-green-500 mt-0.5">Copied!</span>}
     </div>

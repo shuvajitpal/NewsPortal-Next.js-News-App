@@ -9,8 +9,9 @@ interface PaginationProps {
 }
 
 const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, pageSize = 10, onPageChange }) => {
-  const totalPages = Math.ceil(totalResults / pageSize);
   const { theme } = useTheme();
+  
+  const totalPages = Math.ceil(totalResults / pageSize);
 
   if (totalPages <= 1) return null;
 

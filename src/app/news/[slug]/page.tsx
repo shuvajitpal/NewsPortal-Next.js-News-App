@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import ShareButtons from "@/components/ShareButtons";
+import StatusMessage from "@/components/StatusMessage";
 
 interface Article {
   title: string;
@@ -22,6 +23,7 @@ export default function NewsDetailsPage() {
   const router = useRouter();
   const [article, setArticle] = useState<Article | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error] = useState<string | null>(null);
   const [isFav, setIsFav] = useState(false);
 
   useEffect(() => {
@@ -54,7 +56,9 @@ export default function NewsDetailsPage() {
     setIsFav(!isFav);
   };
 
-  if (!article) return <p className="mt-6 text-center">Loadin Article...</p>
+  if (loading) return <StatusMessage type="loading" message="Loading Article..." />;
+  if (error) return <StatusMessage type="error" message={error} />;
+  if (!article) return <StatusMessage type="error" message="Article not found. Redirecting..." />;
 
   const author = <Image src="/person.png" alt="logo" width={10} height={10} />
   const calender = <Image src="/calender.png" alt="logo" width={10} height={10} />

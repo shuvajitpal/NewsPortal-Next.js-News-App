@@ -7,6 +7,7 @@ import Pagination from "@/components/Pagination";
 import { useEffect, useState } from "react";
 import CategoryList from "@/components/CategoryList";
 import { useTheme } from "@/context/ThemeContext";
+import StatusMessage from "@/components/StatusMessage";
 
 export default function HomePage() {
   const [query, setQuery] = useState("");
@@ -35,15 +36,21 @@ export default function HomePage() {
           Top Headlines
         </h1>
       </div>
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4">
-        {articles.length > 0 ? (
-          articles.map((article, i) => (
-            <NewsCard key={i} article={article} />
-          ))
-        ) : (
-          !loading && <p className="text-center text-gray-500">No news found.</p>
-        )}
-      </section>
+
+      {loading && <StatusMessage type="loading" />}
+      {error && <StatusMessage type="error" message={error} />}
+
+      {!loading && !error && (
+        <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-6 p-4">
+          {articles.length > 0 ? (
+            articles.map((article, i) => (
+              <NewsCard key={i} article={article} />
+            ))
+          ) : (
+            <p className="text-center text-gray-500 col-span-full">No news found.</p>
+          )}
+        </section>
+      )}
       {!loading && !error && totalResults > 10 && (
         <Pagination
           currentPage={page}

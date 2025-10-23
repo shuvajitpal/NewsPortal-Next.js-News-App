@@ -6,9 +6,10 @@ import { createSlug, formatDate } from "@/lib/utils";
 import { NewsCardProps } from "@/lib/constants";
 
 export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) {
-  const { title, description, url, urlToImage, publishedAt, source } = article;
-  const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
+
+  const { title, description, urlToImage, publishedAt, source } = article;
+  const { theme } = useTheme();
 
   const formattedDate = formatDate(publishedAt);
   const slug = createSlug(title);

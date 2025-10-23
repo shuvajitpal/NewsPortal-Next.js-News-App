@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import Image from "next/image";
 import { useTheme } from "@/context/ThemeContext";
@@ -7,9 +6,11 @@ import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 
 export default function Navbar() {
-  const { theme, toggleTheme } = useTheme();
-  const pathname = usePathname();
   const [favouriteCount, setFavouriteCount] = useState(0);
+  
+  const { theme, toggleTheme } = useTheme();
+
+  const pathname = usePathname();
 
   useEffect(() => {
     const updateFavouriteCount = () => {
