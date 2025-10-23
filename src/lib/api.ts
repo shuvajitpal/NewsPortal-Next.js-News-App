@@ -3,7 +3,7 @@ const BASE_URL = "https://newsapi.org/v2";
 
 export const newsApi = {
   fetchNews: async (query?: string, category?: string, page: number = 1) => {
-    const pageSize = 10;
+    const pageSize = 9;
     let url;
 
     if (query) {

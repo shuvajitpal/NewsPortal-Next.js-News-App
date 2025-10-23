@@ -60,7 +60,7 @@ export default function CategoryPage(){
         <Pagination 
           currentPage={page}
           totalResults={totalResults}
-          pageSize={10}
+          pageSize={9}
           onPageChange={handlePageChange}
         />
       )}

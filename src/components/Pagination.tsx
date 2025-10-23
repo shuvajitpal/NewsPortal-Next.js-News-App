@@ -49,7 +49,6 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
 
   const pageNumbers = getPageNumbers();
   const startResult = (currentPage - 1) * pageSize + 1;
-  const endResult = Math.min(currentPage * pageSize, totalResults);
 
   return (
     <div className="flex flex-col items-center gap-4 my-2">
@@ -57,7 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
         <button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${theme === "dark"
+          className={`px-2 py-1 rounded-md text-sm font-medium transition-all duration-200 ${theme === "dark"
             ? "bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400"
             : "bg-gray-700 text-white hover:bg-gray-600 disabled:bg-gray-800 disabled:text-gray-500"
             }`}
@@ -71,7 +70,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
               key={index}
               onClick={() => typeof page === 'number' && onPageChange(page)}
               disabled={page === '...'}
-              className={`min-w-[40px] h-10 flex items-center justify-center rounded-md text-sm font-medium transition-all duration-200 ${page === currentPage
+              className={`min-w-[30px] h-5 flex items-center justify-center rounded-md text-sm font-medium transition-all duration-200 ${page === currentPage
                 ? "bg-indigo-600 text-white"
                 : page === '...'
                   ? "text-gray-500 cursor-default"
@@ -88,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
         <button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${theme === "dark"
+          className={`px-2 py-1 rounded-md text-sm font-medium transition-all duration-200 ${theme === "dark"
               ? "bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:bg-gray-50 disabled:text-gray-400"
               : "bg-gray-700 text-white hover:bg-gray-600 disabled:bg-gray-800 disabled:text-gray-500"
             }`}
