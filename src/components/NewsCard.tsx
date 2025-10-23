@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
+import { useEffect, useState } from "react";
 
 interface NewsCardProps {
   article: {
@@ -12,11 +13,13 @@ interface NewsCardProps {
     publishedAt: string;
     content: string;
   }
+  onFavouriteToggle?: () => void;
 }
 
 export default function NewsCard({ article }: NewsCardProps) {
   const { title, description, url, urlToImage, publishedAt, source } = article;
   const { theme } = useTheme();
+  const [isFav, setIsFav] = useState(false);
   const formattedDate = new Date(publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -36,14 +39,27 @@ export default function NewsCard({ article }: NewsCardProps) {
 
   const slug = createSlug(title);
 
+  useEffect(() => {
+    const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
+    setIsFav(favs.some((a: any) => a.url === article.url));
+  }, [article.url]);
+
+  const handleFavourite = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation(); 
+    const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
+    let updated;
+    if (isFav) updated = favs.filter((a: any) => a.url !== article.url);
+    else updated = [...favs, article];
+
+    localStorage.setItem("favourite-articles", JSON.stringify(updated));
+    setIsFav(!isFav);
+  };
+
   const handleClick = () => {
-  console.log("Storing article with slug:", slug);
-  console.log("Article data:", article);
-  localStorage.setItem(`article_${slug}`, JSON.stringify(article));
-  
-  const stored = localStorage.getItem(`article_${slug}`);
-  console.log("Storage test - retrieved:", !!stored);
-};
+    localStorage.setItem(`article_${slug}`, JSON.stringify(article));
+    const stored = localStorage.getItem(`article_${slug}`);
+  };
 
   return (
     <div className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} rounded-lg shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-500 overflow-hidden flex flex-col h-full`}>
@@ -58,7 +74,18 @@ export default function NewsCard({ article }: NewsCardProps) {
                 : "max-w-30 max-h-30 object-contain opacity-70 ml-26 mt-8"
             }
           />
-
+          <button
+            onClick={handleFavourite}
+            className="absolute top-1 right-1 p-2 bg-black/20 rounded-full backdrop-blur-sm transition-colors shadow-lg"
+          >
+            <img
+              src={isFav ? "/fill-heart.png" : "/heart-b.png"}
+              alt={isFav ? "Remove Favorite" : "Add Favorite"}
+              width={16}
+              height={16}
+              className="hover:scale-120 active:scale-90 transition-all duration-300"
+            />
+          </button>
         </div>
         <div className="p-4 flex flex-col flex-grow cursor-pointer -mt-2">
           <h2 className={`text-lg font-semibold ${theme === "dark" ? "text-gray-900" : "dark:text-white"} mb-2 leading-tight line-clamp-2 hover:scale-102 transition-all duration-200`}>
@@ -71,8 +98,8 @@ export default function NewsCard({ article }: NewsCardProps) {
             <div className="flex  hover:scale-102 transition-all duration-200">{rss}
               <span className="truncate max-w-[100%]">{source?.name}</span>
             </div>
-            <div className="flex items-center gap-1 hover:scale-102 transition-all duration-200">{clock} 
-            <span>{formattedDate}</span></div>
+            <div className="flex items-center gap-1 hover:scale-102 transition-all duration-200">{clock}
+              <span>{formattedDate}</span></div>
           </div>
         </div>
       </Link>
