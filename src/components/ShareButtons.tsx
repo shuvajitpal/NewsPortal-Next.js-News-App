@@ -53,7 +53,7 @@ export default function ShareButtons({ url, title }: ShareButtonProps) {
         href={whatsappShareUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="shw"
+        className="shwp"
       ><span>{wp}</span>WhatsApp
       </a>
       <a

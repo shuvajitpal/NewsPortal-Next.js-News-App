@@ -15,7 +15,7 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
   const slug = createSlug(title);
 
   const rss = <img src={`${theme === "dark" ? "/rss.png" : "/rss-w.png"}`} alt="logo" width={15} height={10} />
-  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" width={12} />
+  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" className="icon-sm"/>
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");

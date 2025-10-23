@@ -63,7 +63,7 @@ body {
 }
 
 .card-meta {
-  @apply flex justify-between items-center text-xs mt-auto text-gray-500 pt-2 border-t;
+  @apply flex justify-between items-center text-xs mt-auto text-gray-500 pt-1 border-t;
 }
 
 .cd-img {
@@ -75,7 +75,7 @@ body {
 }
 
 .fv-hv {
-  @apply hover:scale-120 active:scale-90 transition-all duration-300;
+  @apply hover:scale-120 active:scale-50 transition-all duration-300;
 }
 
 .cd-mimg {
@@ -147,7 +147,7 @@ body {
 }
 
 .d-fvi {
-  @apply hover:scale-120 active:scale-90 transition-all duration-300;
+  @apply hover:scale-120 active:scale-50 transition-all duration-300;
 }
 
 .d-asd {
@@ -259,7 +259,7 @@ body {
 }
 
 .flb {
-  @apply hover:text-indigo-500 hover:scale-110 transition-all duration-200 active:scale-90;
+  @apply hover:text-indigo-500 hover:scale-110 transition-all duration-200 active:scale-50;
 }
 
 .fig {
@@ -267,7 +267,7 @@ body {
 }
 
 .fi {
-  @apply cursor-pointer hover:scale-120 transition-transform;
+  @apply cursor-pointer hover:scale-120 transition-transform active:scale-20;
 }
 
 .fmb {
@@ -430,7 +430,7 @@ body {
   @apply flex items-center px-4 py-0.5 bg-blue-800 text-white rounded-full text-sm hover:bg-blue-900 transition-colors shadow-md gap-1 shadow-white/40;
 }
 
-.shw {
+.shwp {
   @apply flex items-center px-4 py-0.5 bg-green-500 text-white rounded-full text-sm hover:bg-green-600 transition-colors shadow-md gap-1 shadow-white/60;
 }
 
@@ -448,4 +448,8 @@ body {
 
 .sm {
   @apply flex flex-col items-center justify-center mt-20 mb-10 text-2xl;
+}
+
+.icon-sm {
+  @apply w-[12px] h-[12px] object-contain mt-0.5;
 }
