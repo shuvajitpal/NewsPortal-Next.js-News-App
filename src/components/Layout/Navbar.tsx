@@ -41,6 +41,7 @@ export default function Navbar() {
   const bg = `${theme === "dark" ? " hover:shadow-[0_0_10px_#f472b6]" : " hover:shadow-[0_0_10px_#fef3c7]"}`;
 
   const isFavouritePage = pathname === '/favourites';
+  const isHomePage = pathname === '/';
 
   return (
     <nav className={`${theme === "dark" ? "bg-white/30 text-black shadow-[0_6px_15px_rgba(0,0,0,0.4)]"
@@ -49,14 +50,19 @@ export default function Navbar() {
         <h1 className="text-2xl font-extrabold mt-1.5">NewsPortal</h1>
       </div>
       <div className="flex items-end gap-6">
-        <Link href="/" className={`round-bg ${bg}`}>{home}</Link>
-        <Link href="/favourites" className={`round-bg ${bg} relative`}>{favourite}
-          {!isFavouritePage && favouriteCount > 0 && (
-            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center ">
-              {favouriteCount > 99 ? '99+' : favouriteCount}
-            </span>
-          )}
-        </Link>
+        {!isHomePage && (
+          <Link href="/" className={`round-bg ${bg}`}>{home}</Link>
+        )}
+        {!isFavouritePage && (
+          <Link href="/favourites" className={`round-bg ${bg} relative`}>
+            {favourite}
+            {favouriteCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {favouriteCount > 99 ? '99+' : favouriteCount}
+              </span>
+            )}
+          </Link>
+        )}
         <button
           onClick={toggleTheme}
           className={`round-bg ${bg}`}
