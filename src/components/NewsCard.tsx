@@ -45,15 +45,21 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
     <div className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} rounded-lg shadow-lg hover:shadow-lg hover:scale-105 transition-all duration-500 overflow-hidden flex flex-col h-full`}>
       <Link href={`/news/${slug}`} onClick={handleClick}>
         <div className="relative sm:h-40 hover:scale-102 transition-all duration-200">
-          <img
-            src={urlToImage || "/placeholder.png"}
-            alt={title}
-            className={
-              urlToImage
-                ? "w-full h-full object-cover"
-                : "max-w-30 max-h-30 object-contain opacity-70 ml-26 mt-8"
-            }
-          />
+          {urlToImage ? (
+            <img
+              src={urlToImage}
+              alt={title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <img
+                src="/placeholder.png"
+                alt="No image available"
+                className="max-w-20 max-h-20 object-contain opacity-50"
+              />
+            </div>
+          )}
           <button
             onClick={handleFavourite}
             className="absolute top-1 right-1 p-2 bg-black/20 rounded-full backdrop-blur-sm transition-colors shadow-lg"

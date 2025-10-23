@@ -39,7 +39,7 @@ export default function CategoryPage(){
       <CategoryList selectedCategory={category} />
 
       {category && (
-        <div className="text-center mt-8">
+        <div className="text-center mt-6">
           <h1 className="text-2xl font-bold animated-rainbow-text capitalize">
             {category} News
           </h1>
@@ -49,7 +49,7 @@ export default function CategoryPage(){
       {loading && <p className="text-center mt-4">Loading...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mt-2 p-4">
+      <section className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 p-4">
         {articles.length > 0 ? (
           articles.map((article, i) => <NewsCard key={i} article={article} />)
         ) : (

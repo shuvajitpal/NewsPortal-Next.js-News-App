@@ -105,19 +105,27 @@ export default function NewsDetailsPage() {
           <span className="flex items-center space-x-1">{calender}
             <span>Published: {formattedDate}</span></span>
         </div>
-        {article.urlToImage && (
-          <div className="relative w-full aspect-video mb-6 rounded-lg overflow-hidden"> {/*"relative w-full h-80 mb-6">*/}
+        <div className={`mb-2 rounded-lg overflow-hidden ${article.urlToImage ? "w-full aspect-video" : "h-15 flex items-center justify-center"}`}>
+          {article.urlToImage ? (
             <img
               src={article.urlToImage}
               alt={article.title}
               className="w-full h-full object-cover"
             />
-          </div>
-        )}
+          ) : (
+            <div className="w-full h-full flex items-center justify-center">
+              <img
+                src="/placeholder.png"
+                alt="No image available"
+                className="max-w-16 max-h-16 object-contain opacity-40"
+              />
+            </div>
+          )}
+        </div>
         <p className={`text-lg ${theme === "dark" ? "text-gray-700" : "text-gray-300"} leading-relaxed mb-8 whitespace-pre-wrap`}>
           {article.content}
           <br /><br />
-          *For the full live article, please visit the original source:*
+          *For the Full Live Article, Please Visit the Original Source:*
           <a
             href={article.url}
             target="_blank"
