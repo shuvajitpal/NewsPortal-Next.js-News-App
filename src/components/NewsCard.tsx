@@ -16,7 +16,7 @@ interface NewsCardProps {
   onFavouriteToggle?: () => void;
 }
 
-export default function NewsCard({ article }: NewsCardProps) {
+export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) {
   const { title, description, url, urlToImage, publishedAt, source } = article;
   const { theme } = useTheme();
   const [isFav, setIsFav] = useState(false);
@@ -49,7 +49,9 @@ export default function NewsCard({ article }: NewsCardProps) {
     e.stopPropagation(); 
     const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
     let updated;
-    if (isFav) updated = favs.filter((a: any) => a.url !== article.url);
+    if (isFav) {updated = favs.filter((a: any) => a.url !== article.url);
+      if (onFavouriteToggle) onFavouriteToggle();
+    }
     else updated = [...favs, article];
 
     localStorage.setItem("favourite-articles", JSON.stringify(updated));
