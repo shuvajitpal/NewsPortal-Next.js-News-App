@@ -1,6 +1,6 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
-import { socialMediaIcons } from "@/lib/constants";
+import { socialMediaIcons, socialMediaLinks } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -77,9 +77,35 @@ export default function Footer() {
           <div>
             <h4 className={`${h4}`}>Follow Us</h4>
             <div className="fig">
-              {socialMediaIcons.map((src, i) => (
-                <img key={i} src={src} alt="social" width={22} height={22} className="fi" />
-              ))}
+              {socialMediaIcons.map((src, i) => {
+                const link = socialMediaLinks[i];
+                const image = (
+                  <img
+                    key={i}
+                    src={src}
+                    alt="social"
+                    width={22}
+                    height={22}
+                    className="fi"
+                  />
+                );
+
+                return link ? (
+                  <a
+                    key={i}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    {image}
+                  </a>
+                ) : (
+                  <div key={i} className="block">
+                    {image}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </motion.div>

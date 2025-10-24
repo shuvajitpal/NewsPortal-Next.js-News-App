@@ -40,3 +40,12 @@ export const socialMediaIcons = [
   "/github.png", "/linkedin.png", "/twitter.png", "/youtube.png",
   "/facebook.png", "/instagram.png"
 ];
+
+export const socialMediaLinks = [
+    "https://github.com/shuvajitpal", // github
+    "https://www.linkedin.com/in/shuvajit-pal-a324241b2", // linkedin
+    "https://x.com/shuvajitpal103", // twitter
+    null, // youtube (no link)
+    "https://www.facebook.com/share/1D4zcTSDzz/", // facebook
+    "https://www.instagram.com/shuvajit.pal?igsh=czlhNHFkb2htajQ3" // instagram
+  ];
