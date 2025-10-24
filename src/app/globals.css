@@ -71,7 +71,7 @@ body {
 }
 
 .cd-fv {
-  @apply absolute top-1 right-1 p-2 bg-black/20 rounded-full backdrop-blur-sm transition-colors shadow-lg;
+  @apply absolute top-2 right-2 p-2 bg-black/20 rounded-full backdrop-blur-sm transition-colors shadow-lg;
 }
 
 .fv-hv {
