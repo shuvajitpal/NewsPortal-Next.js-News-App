@@ -4,6 +4,7 @@ import { useTheme } from "@/context/ThemeContext";
 import { useEffect, useState } from "react";
 import { createSlug, formatDate } from "@/lib/utils";
 import { NewsCardProps } from "@/lib/constants";
+import { motion } from "framer-motion";
 
 export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) {
   const [isFav, setIsFav] = useState(false);
@@ -43,7 +44,18 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
   };
 
   return (
-    <div className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} card`}>
+    <motion.div
+      className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} card`}
+      whileHover={{ 
+        scale: 1.03,
+        transition: { duration: 0.2 }
+      }}
+      whileTap={{ scale: 0.98 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Link href={`/news/${slug}`} onClick={handleClick}>
         <div className="cd-wimg">
           {urlToImage ? (
@@ -61,9 +73,11 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
               />
             </div>
           )}
-          <button
+          <motion.button
             onClick={handleFavourite}
             className="cd-fv"
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
           >
             <img
               src={isFav ? "/fill-heart.png" : "/heart-b.png"}
@@ -72,7 +86,7 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
               height={16}
               className="fv-hv"
             />
-          </button>
+          </motion.button>
         </div>
         <div className="card-content">
           <h2 className={`${theme === "dark" ? "text-gray-900" : "dark:text-white"} card-title`}>
@@ -90,6 +104,6 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
           </div>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 };

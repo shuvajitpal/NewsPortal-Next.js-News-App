@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTheme } from "@/context/ThemeContext";
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [favouriteCount, setFavouriteCount] = useState(0);
@@ -45,8 +46,10 @@ export default function Navbar() {
   const isHomePage = pathname === '/';
 
   return (
-    <nav className={`${theme === "dark" ? "nvw-l"
-      : "nvw-b"} nvw`}>
+    <motion.nav className={`${theme === "dark" ? "nvw-l" : "nvw-b"} nvw`}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, type: "spring" }}>
       <div className="nvrss">{rss}
         <h1 className="nvh">NewsPortal</h1>
       </div>
@@ -57,18 +60,30 @@ export default function Navbar() {
         {!isFavouritePage && (
           <Link href="/favourites" className={`round-bg ${bg} relative`}>
             {favourite}
-            {favouriteCount > 0 && (
-              <span className="nvfv">
-                {favouriteCount > 99 ? '99+' : favouriteCount}
-              </span>
-            )}
+            <AnimatePresence>
+                {favouriteCount > 0 && (
+                  <motion.span 
+                    className="nvfv"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    exit={{ scale: 0 }}
+                    key={favouriteCount}
+                  >
+                    {favouriteCount > 99 ? '99+' : favouriteCount}
+                  </motion.span>
+                )}
+              </AnimatePresence>
           </Link>
         )}
-        <button
+        <motion.button
           onClick={toggleTheme}
           className={`round-bg ${bg}`}
-        >{change}</button>
+          whileHover={{ scale: 1.1}}
+          whileTap={{ scale: 0.9, rotate: 6000 }}
+        >
+          {change}
+        </motion.button>
       </div>
-    </nav>
+    </motion.nav>
   )
 }

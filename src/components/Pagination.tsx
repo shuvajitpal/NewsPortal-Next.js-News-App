@@ -1,5 +1,6 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
+import { motion } from "framer-motion";
 
 interface PaginationProps {
   currentPage: number;
@@ -52,14 +53,23 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
   const startResult = (currentPage - 1) * pageSize + 1;
 
   return (
-    <div className="flex flex-col items-center gap-4 my-2">
+    <motion.div
+      className="flex flex-col items-center gap-4 my-2"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex items-center gap-2">
-        <button
+        <motion.button
           onClick={() => onPageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className={`pgbp ${theme === "dark" ? "pgbp-l" : "pgbp-b"}`}>
+          className={`pgbp ${theme === "dark" ? "pgbp-l" : "pgbp-b"}`}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           Prev
-        </button>
+        </motion.button>
 
         <div className="pgnw">
           {pageNumbers.map((page, index) => (
@@ -73,16 +83,21 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
           ))}
         </div>
 
-        <button
+        <motion.button
           onClick={() => onPageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className={`pgn ${theme === "dark" ? "pgn-l" : "pgn-b"}`}>Next
-        </button>
+          className={`pgn ${theme === "dark" ? "pgn-l" : "pgn-b"}`}
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1 }}
+        >
+          Next
+        </motion.button>
       </div>
       <div className={`pgs ${theme === "dark" ? "text-gray-600" : "text-gray-400"}`}>
         Showing {startResult} of {totalResults} results
       </div>
-    </div>
+    </motion.div>
   )
 }
 export default Pagination;

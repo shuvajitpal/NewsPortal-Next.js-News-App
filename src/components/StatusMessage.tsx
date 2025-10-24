@@ -1,8 +1,9 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
-interface StatusMessageProps{
+interface StatusMessageProps {
   type: 'loading' | 'error';
   message?: string;
 }
@@ -19,8 +20,13 @@ export default function StatusMessage({ type, message }: StatusMessageProps) {
   const imageSrc = type === 'loading' ? "/loading.webp" : "/err.png";
   const altText = type === 'loading' ? "Loading" : "Error";
 
-  return(
-    <div className="sm">
+  return (
+    <motion.div
+      className="sm"
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Image
         src={imageSrc}
         alt={altText}
@@ -28,9 +34,14 @@ export default function StatusMessage({ type, message }: StatusMessageProps) {
         height={100}
         className="mb-4"
       />
-      <p className={`text-center ${theme === "dark" ? "text-gray-800" : "text-gray-200"}`}>
+      <motion.p
+        className={`text-center ${theme === "dark" ? "text-gray-800" : "text-gray-200"}`}
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+      >
         {displayMessage}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   )
 }

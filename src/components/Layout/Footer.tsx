@@ -2,6 +2,7 @@
 import { useTheme } from "@/context/ThemeContext";
 import { socialMediaIcons } from "@/lib/constants";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const { theme } = useTheme();
@@ -13,10 +14,23 @@ export default function Footer() {
     router.push(`/category/${category.toLowerCase()}`);
   };
 
+  const containerVariants = {hidden: { opacity: 0 }, visible: {opacity: 1, transition: {staggerChildren: 0.1}}};
+
   return (
-    <footer className={`${theme === "dark" ? 'fbg-l' : 'fbg-b'} fbg`}>
+    <motion.footer 
+      className={`${theme === "dark" ? 'fbg-l' : 'fbg-b'} fbg`}
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.1, type: "spring" }}
+    >
       <div className="fp">
-        <div className="fg">
+        <motion.div 
+          className="fg"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <div>
             <h4 className={`${h4}`}>NewsPortal</h4>
             <ul className={`${ul}`}>
@@ -65,13 +79,18 @@ export default function Footer() {
               ))}
             </div>
           </div>
-        </div>
-        <div className={`fmb ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}>
+        </motion.div>
+        <motion.div 
+          className={`fmb ${theme === "dark" ? "border-gray-800" : "border-gray-300"} text-center`}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           <p className={`text-sm ${theme === "dark" ? "text-gray-700" : "text-gray-300"}`}>
             © {new Date().getFullYear()} NewsPortal. All rights reserved.
           </p>
-        </div>
+        </motion.div>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

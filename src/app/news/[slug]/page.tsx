@@ -5,6 +5,7 @@ import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import ShareButtons from "@/components/ShareButtons";
 import StatusMessage from "@/components/StatusMessage";
+import { motion } from "framer-motion";
 
 interface Article {
   title: string;
@@ -39,6 +40,10 @@ export default function NewsDetailsPage() {
       router.push("/");
     }, 2000);
     setLoading(false);
+    window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
   }, [params.slug, router]);
 
   const handleFavourite = () => {
@@ -71,33 +76,60 @@ export default function NewsDetailsPage() {
   });
 
   return (
-    <div className="dm">
-      <button
+    <motion.div 
+      className="dm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.button
         onClick={() => router.back()}
         className={`${theme === "dark" ? "d-bk-l" : "d-bk-b"} d-bk`}
+        whileHover={{ x: -5 }}
+        whileTap={{ scale: 0.95 }}
       >
         ←<span className="hover:underline"> Back to News</span>
-      </button>
+      </motion.button>
 
-      <div className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} d-wm`}>
+      <motion.div 
+        className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} d-wm`}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5, type: "spring" }}
+      >
         <div className="d-hfv">
-          <h1 className={`d-h ${theme === "dark" ? "text-gray-900" : "text-white"}`}>
+          <motion.h1 
+            className={`d-h ${theme === "dark" ? "text-gray-900" : "text-white"}`}
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
             {article.title}
-          </h1>
-          <button
+          </motion.h1>
+          <motion.button
             onClick={handleFavourite}
             className={`${theme === "dark" ? "bg-black/20" : "bg-white/20"} d-fv`}
-          ><img
-              src={isFav ? "/fill-heart.png" : theme === "dark"
-                ? "/heart-l.png"
-                : "/heart-b.png"}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            <img
+              src={isFav ? "/fill-heart.png" : theme === "dark" ? "/heart-l.png" : "/heart-b.png"}
               alt={isFav ? "Remove Favorite" : "Add Favorite"}
               width={16}
               height={16}
               className="d-fvi"
-            /></button>
+            />
+          </motion.button>
         </div>
-        <div className={`${theme === "dark" ? "d-asd-l" : "d-asd-b"} d-asd`}>
+        <motion.div 
+          className={`${theme === "dark" ? "d-asd-l" : "d-asd-b"} d-asd`}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
           <span className="d-athr">{author}
             {article.author && (
               <span>{article.author}</span>
@@ -108,8 +140,13 @@ export default function NewsDetailsPage() {
           </span>
           <span className="d-cl">{calender}
             <span>Published: {formattedDate}</span></span>
-        </div>
-        <div className={`d-imgw ${article.urlToImage ? "d-imgy" : "d-imgn"}`}>
+        </motion.div>
+        <motion.div 
+          className={`d-imgw ${article.urlToImage ? "d-imgy" : "d-imgn"}`}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
           {article.urlToImage ? (
             <img
               src={article.urlToImage}
@@ -125,8 +162,14 @@ export default function NewsDetailsPage() {
               />
             </div>
           )}
-        </div>
-        <p className={`${theme === "dark" ? "text-gray-700" : "text-gray-300"} d-ct`}>
+        </motion.div>
+        <motion.p 
+          className={`${theme === "dark" ? "text-gray-700" : "text-gray-300"} d-ct`}
+          initial={{ y: 20, opacity: 0 }}
+          transition={{ delay: 0.3 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {article.content}
           <br /><br />
           *For the Full Live Article, Please Visit the Original Source:*
@@ -137,9 +180,9 @@ export default function NewsDetailsPage() {
             className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} d-lk`}>
             🔗<span className="hover:underline">{article.url.split('/')[2]}</span>
           </a>
-        </p>
+        </motion.p>
         <ShareButtons url={article.url} title={article.title} />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   )
 }

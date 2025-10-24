@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { useRouter } from "next/navigation";
 import StatusMessage from "@/components/StatusMessage";
+import { motion } from "framer-motion";
 
 interface Article {
   source: { name: string; }
@@ -39,7 +40,11 @@ export default function FavouritePage() {
   if (error) return <StatusMessage type="error" message={error} />;
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <h1 className={`fv-h ${theme === "dark" ? "text-black" : "text-white"}`}>My Favourites</h1>
 
       {favourites.length === 0 ? (
@@ -61,6 +66,6 @@ export default function FavouritePage() {
           ))}
         </section>
       )}
-    </div>
+    </motion.div>
   )
 }

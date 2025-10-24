@@ -7,6 +7,7 @@ import useFetchNews from "@/hooks/useFetchNews";
 import Pagination from "@/components/Pagination";
 import { useEffect, useState } from "react";
 import StatusMessage from "@/components/StatusMessage";
+import { motion } from "framer-motion";
 
 export default function CategoryPage() {
   const params = useParams();
@@ -33,7 +34,11 @@ export default function CategoryPage() {
   }, [formattedCategory, articles])
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <Header />
       <CategoryList selectedCategory={category} />
 
@@ -65,6 +70,6 @@ export default function CategoryPage() {
           onPageChange={handlePageChange}
         />
       )}
-    </div>
+    </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 import { useTheme } from "@/context/ThemeContext";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface SearchBarProps { onSearch: (query: string) => void; }
 
@@ -13,7 +14,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
       if (query.trim() != "") onSearch(query.trim());
     }, 500);
     return () => clearTimeout(delay);
-  },[query, onSearch]);
+  }, [query, onSearch]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +22,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   };
 
   return (
-    <form
+    <motion.form
       onSubmit={handleSubmit}
       className="sbw"
+      initial={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.5, delay: 0.1 }}
+      whileInView={{ opacity: 1, y: 0 }}
     >
       <div className="sb">
         <input
@@ -33,14 +37,16 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
           placeholder="Search news..."
           className={`sbi ${theme === "dark" ? "sbi-l" : "sbi-b"}`}
         />
-        <button
+        <motion.button
           type="submit"
           className={`sbs`}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
         >
           Search
-        </button>
+        </motion.button>
       </div>
-    </form>
+    </motion.form>
   )
 }
 export default SearchBar;

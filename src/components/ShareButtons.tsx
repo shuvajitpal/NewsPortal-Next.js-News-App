@@ -2,6 +2,7 @@
 import { useTheme } from "@/context/ThemeContext";
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 interface ShareButtonProps {
   url: string;
@@ -32,41 +33,83 @@ export default function ShareButtons({ url, title }: ShareButtonProps) {
   const tw = <Image src="/twtw.png" alt="logo" width={14} height={20} />
   const cp = <Image src="/cpw.png" alt="" width={14} height={20} />
 
+  const buttonVariants = { hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } }, hover: { scale: 1.1, transition: { duration: 0.2 } }, tap: { scale: 0.9 } };
+
   return (
-    <div className="shw">
+    <motion.div
+      className="shw"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ delay: 0.3 }}
+    >
       <span className={`shs ${theme === "dark" ? "text-gray-600" : "text-gray-300"}`}>Share:</span>
-      <a
+      <motion.a
         href={twitterShareUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="sht"
+        variants={buttonVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        whileTap="tap"
       ><span>{tw}</span>Twitter
-      </a>
-      <a
+      </motion.a>
+      <motion.a
         href={linkedinShareUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="shl"
+        variants={buttonVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        whileTap="tap"
       ><span>{lin}</span>Linkedin
-      </a>
-      <a
+      </motion.a>
+      <motion.a
         href={whatsappShareUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="shwp"
+        variants={buttonVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        whileTap="tap"
       ><span>{wp}</span>WhatsApp
-      </a>
-      <a
+      </motion.a>
+      <motion.a
         href={facebookShareUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="shf"
+        variants={buttonVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        whileTap="tap"
       ><span>{fb}</span>Facebook
-      </a>
-      <button onClick={handleCopy} className="shc">
+      </motion.a>
+      <motion.button
+        onClick={handleCopy}
+        className="shc"
+        variants={buttonVariants}
+        initial="hidden"
+        animate="visible"
+        whileHover="hover"
+        whileTap="tap"
+      >
         <span>{cp}</span> Copy
-      </button >
-      {copied && <span className="shcd">Copied!</span>}
-    </div>
+      </motion.button>
+      {copied && <motion.span
+        className="shcd"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0 }}
+      >
+        Copied!
+      </motion.span>}
+    </motion.div>
   )
 }
