@@ -1,4 +1,3 @@
-// src/pages/api-source.tsx
 "use client";
 import { motion } from "framer-motion";
 
@@ -34,15 +33,12 @@ export default function ApiSourcePage() {
           animate="visible"
           className="max-w-4xl mx-auto"
         >
-          {/* Header */}
           <motion.div variants={itemVariants} className="text-center mb-12">
             <h1 className="text-4xl font-bold mb-2">API Sources</h1>
             <p className='text-lg'>
               Information about the news APIs powering our platform.
             </p>
           </motion.div>
-
-          {/* Main API Source */}
           <motion.div 
             variants={itemVariants}
             className={`rounded-lg border shadow-lg`}
@@ -120,8 +116,6 @@ export default function ApiSourcePage() {
               </div>
             </div>
           </motion.div>
-
-          {/* API Status & Message */}
           <motion.div 
             variants={itemVariants}
             className='rounded-lg p-6 border shadow-lg'

@@ -39,7 +39,9 @@ export default function Footer() {
               <li><Link href="/api-source" className="fl">
                 API Sources
               </Link></li>
-              <li className="fl ">Privacy Policy</li>
+              <li><Link href="/privacy-policy" className="fl">
+                Privacy Policy
+              </Link></li>
             </ul>
           </div>
           <div>

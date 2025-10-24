@@ -47,7 +47,7 @@ body {
 }
 
 .card {
-  @apply rounded-lg shadow-lg hover:shadow-lg transition-all duration-500 overflow-hidden flex flex-col h-full hover:scale-105;
+  @apply rounded-lg shadow-lg hover:shadow-lg transition-all duration-500 overflow-hidden flex flex-col h-full hover:scale-103 active:scale-50;
 }
 
 .card-content {
@@ -203,7 +203,7 @@ body {
 }
 
 .d-lk {
-  @apply flex items-center mt-2 gap-0.5;
+  @apply flex items-center mt-2 gap-0.5 ;
 }
 
 .bd {

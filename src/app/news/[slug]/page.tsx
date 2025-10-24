@@ -178,7 +178,7 @@ export default function NewsDetailsPage() {
             target="_blank"
             rel="noopener noreferrer"
             className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} d-lk`}>
-            🔗<span className="hover:underline">{article.url.split('/')[2]}</span>
+            🔗<span className="hover:underline active:scale-60 transition-all duration-300">{article.url.split('/')[2]}</span>
           </a>
         </motion.p>
         <ShareButtons url={article.url} title={article.title} />
