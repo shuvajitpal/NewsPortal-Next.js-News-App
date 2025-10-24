@@ -8,6 +8,7 @@ import Pagination from "@/components/Pagination";
 import { useEffect, useState } from "react";
 import StatusMessage from "@/components/StatusMessage";
 import { motion } from "framer-motion";
+import SearchBar from "@/components/SearchBar";
 
 export default function CategoryPage() {
   const params = useParams();
@@ -16,12 +17,13 @@ export default function CategoryPage() {
   const formattedCategory = category?.toLowerCase();
 
   const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
 
-  const { articles, loading, error, totalResults } = useFetchNews(undefined, formattedCategory, page);
+  const { articles, loading, error, totalResults } = useFetchNews(query, formattedCategory, page);
 
   useEffect(() => {
     setPage(1);
-  }, [formattedCategory])
+  }, [formattedCategory, query])
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -33,6 +35,8 @@ export default function CategoryPage() {
     console.log("Articles:", articles);
   }, [formattedCategory, articles])
 
+  const itemVariants = {hidden: { y: 20, opacity: 0 }, visible: {y: 0, opacity: 1, transition: {duration: 0.5}}};
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -40,6 +44,9 @@ export default function CategoryPage() {
       transition={{ duration: 0.5 }}
     >
       <Header />
+      <motion.div variants={itemVariants}>
+        <SearchBar onSearch={(q) => setQuery(q)} />
+      </motion.div>
       <CategoryList selectedCategory={category} />
 
       {category && (
