@@ -113,7 +113,7 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
           <h2 className={`${theme === "dark" ? "text-gray-900" : "dark:text-white"} card-title`}>
             {title}
           </h2>
-          <p className={`${theme === "dark" ? "text-gray-600" : "text-gray-400"} card-desc`}>
+          <p className={`${theme === "dark" ? "text-gray-600" : "text-gray-400"} card-desc min-h-[2.5rem] ${!description ? 'italic' : ''}`}>
             {description || "No description available."}
           </p>
           <div className={`card-meta ${theme === "dark" ? "border-gray-700" : "border-gray-100"}`}>
