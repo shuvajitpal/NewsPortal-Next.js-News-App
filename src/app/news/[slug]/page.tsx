@@ -26,25 +26,37 @@ export default function NewsDetailsPage() {
   const [loading, setLoading] = useState(true);
   const [error] = useState<string | null>(null);
   const [isFav, setIsFav] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   useEffect(() => {
-    const slug = params.slug as string;
-    console.log("Slug from URL:", slug);
+    if (!params || !params.slug) {
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+      setLoading(false);
+      return;
+    }
+    const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
     const savedArticle = localStorage.getItem(`article_${slug}`);
     if (savedArticle) {
-      const parsed = JSON.parse(savedArticle);
-      setArticle(parsed);
-      const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
-      setIsFav(favs.some((fav: Article) => fav.url === parsed.url));
-    } else setTimeout(() => {
-      router.push("/");
-    }, 2000);
+      try {
+        const parsed = JSON.parse(savedArticle);
+        setArticle(parsed);
+        const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
+        setIsFav(favs.some((fav: Article) => fav.url === parsed.url));
+      } catch (error) {
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      }
+    } else setTimeout(() => {router.push("/");}, 2000);
     setLoading(false);
     window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-  }, [params.slug, router]);
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [params, router]);
 
   const handleFavourite = () => {
     if (!article) return;
@@ -59,6 +71,16 @@ export default function NewsDetailsPage() {
 
     localStorage.setItem("favourite-articles", JSON.stringify(updated));
     setIsFav(!isFav);
+  };
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
   };
 
   if (loading) return <StatusMessage type="loading" message="Loading Article..." />;
@@ -76,7 +98,7 @@ export default function NewsDetailsPage() {
   });
 
   return (
-    <motion.div 
+    <motion.div
       className="dm"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -91,14 +113,14 @@ export default function NewsDetailsPage() {
         ←<span className="hover:underline"> Back to News</span>
       </motion.button>
 
-      <motion.div 
+      <motion.div
         className={`${theme === "dark" ? "bg-white" : "bg-gray-900"} d-wm`}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5, type: "spring" }}
       >
         <div className="d-hfv">
-          <motion.h1 
+          <motion.h1
             className={`d-h ${theme === "dark" ? "text-gray-900" : "text-white"}`}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -124,7 +146,7 @@ export default function NewsDetailsPage() {
             />
           </motion.button>
         </div>
-        <motion.div 
+        <motion.div
           className={`${theme === "dark" ? "d-asd-l" : "d-asd-b"} d-asd`}
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -141,48 +163,57 @@ export default function NewsDetailsPage() {
           <span className="d-cl">{calender}
             <span>Published: {formattedDate}</span></span>
         </motion.div>
-        <motion.div 
+        <motion.div
           className={`d-imgw ${article.urlToImage ? "d-imgy" : "d-imgn"}`}
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.5 }}
         >
-          {article.urlToImage ? (
-            <img
-              src={article.urlToImage}
-              alt={article.title}
-              className=".d-img"
-            />
+          {article.urlToImage && !imageError ? (
+            <>
+              {imageLoading && (
+                <div className="d-imgnw animate-pulse">
+                  <div className="text-gray-500">Loading image...</div>
+                </div>
+              )}
+              <img
+                src={article.urlToImage}
+                alt={article.title}
+                className={`d-img ${imageLoading ? 'hidden' : 'block'}`}
+                onError={handleImageError}
+                onLoad={handleImageLoad}
+              />
+            </>
           ) : (
             <div className="d-imgnw">
               <img
                 src="/placeholder.png"
                 alt="No image available"
                 className="d-nimg"
-              />
+              />Image Unavailable
             </div>
           )}
-        </motion.div>
-        <motion.p 
-          className={`${theme === "dark" ? "text-gray-700" : "text-gray-300"} d-ct`}
-          initial={{ y: 20, opacity: 0 }}
-          transition={{ delay: 0.3 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          {article.content}
-          <br /><br />
-          *For the Full Live Article, Please Visit the Original Source:*
-          <a
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} d-lk`}>
-            🔗<span className="hover:underline active:scale-60 transition-all duration-300">{article.url.split('/')[2]}</span>
-          </a>
-        </motion.p>
-        <ShareButtons url={article.url} title={article.title} />
       </motion.div>
+      <motion.p
+        className={`${theme === "dark" ? "text-gray-700" : "text-gray-300"} d-ct`}
+        initial={{ y: 20, opacity: 0 }}
+        transition={{ delay: 0.3 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {article.content}
+        <br /><br />
+        *For the Full Live Article, Please Visit the Original Source:*
+        <a
+          href={article.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${theme === "dark" ? "text-indigo-600" : "text-indigo-400"} d-lk`}>
+          🔗<span className="hover:underline active:scale-60 transition-all duration-300">{article.url.split('/')[2]}</span>
+        </a>
+      </motion.p>
+      <ShareButtons url={article.url} title={article.title} />
     </motion.div>
+    </motion.div >
   )
 }

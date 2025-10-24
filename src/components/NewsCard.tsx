@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 
 export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) {
   const [isFav, setIsFav] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
 
   const { title, description, urlToImage, publishedAt, source } = article;
   const { theme } = useTheme();
@@ -16,7 +18,7 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
   const slug = createSlug(title);
 
   const rss = <img src={`${theme === "dark" ? "/rss.png" : "/rss-w.png"}`} alt="logo" width={15} height={10} />
-  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" className="icon-sm"/>
+  const clock = <img src={`${theme === "dark" ? "/clock-l.png" : "/clock-b.png"}`} alt="logo" className="icon-sm" />
 
   useEffect(() => {
     const favs = JSON.parse(localStorage.getItem("favourite-articles") || "[]");
@@ -43,10 +45,20 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
     localStorage.setItem(`article_${slug}`, JSON.stringify(article));
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+    setImageError(false);
+  };
+
   return (
     <motion.div
       className={`${theme === "dark" ? "bg-white" : "bg-gray-800"} card`}
-      whileHover={{ 
+      whileHover={{
         scale: 1.03,
         transition: { duration: 0.2 }
       }}
@@ -58,18 +70,27 @@ export default function NewsCard({ article, onFavouriteToggle }: NewsCardProps) 
     >
       <Link href={`/news/${slug}`} onClick={handleClick}>
         <div className="cd-wimg">
-          {urlToImage ? (
-            <img
-              src={urlToImage}
-              alt={title}
-              className="nci"
-            />
+          {urlToImage && !imageError ? (
+            <>
+              {imageLoading && (
+                <div className="ncin animate-pulse">
+                  <div className="cd-mimg opacity-30">Loading...</div>
+                </div>
+              )}
+              <img
+                src={urlToImage}
+                alt={title}
+                className={`nci ${imageLoading ? 'hidden' : 'block'}`}
+                onError={handleImageError}
+                onLoad={handleImageLoad}
+              />
+            </>
           ) : (
             <div className="ncin">
               <img
                 src="/placeholder.png"
                 alt="No image available"
-                className="cd-mimg"
+                className="cd-mimg opacity-60"
               />
             </div>
           )}
