@@ -12,7 +12,7 @@ import SearchBar from "@/components/SearchBar";
 
 export default function CategoryPage() {
   const params = useParams();
-  const categoryParam = params.categoryName;
+  const categoryParam = params?.categoryName;
   const category = Array.isArray(categoryParam) ? categoryParam[0] : categoryParam;
   const formattedCategory = category?.toLowerCase();
 
