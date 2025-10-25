@@ -7,12 +7,17 @@ interface PaginationProps {
   totalResults: number;
   pageSize?: number;
   onPageChange: (page: number) => void;
+  currentArticlesCount?: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, pageSize = 10, onPageChange }) => {
+const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, pageSize = 10, onPageChange, currentArticlesCount }) => {
   const { theme } = useTheme();
 
   const totalPages = Math.ceil(totalResults / pageSize);
+
+  const isLastPage = currentPage === totalPages;
+  const expectedArticles = isLastPage ? totalResults - ((totalPages - 1) * pageSize) : pageSize;
+  const hasIncompletePage = currentArticlesCount && currentArticlesCount < expectedArticles && !isLastPage;
 
   if (totalPages <= 1) return null;
 
@@ -51,6 +56,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
 
   const pageNumbers = getPageNumbers();
   const startResult = (currentPage - 1) * pageSize + 1;
+  const endResult = Math.min(startResult + (currentArticlesCount || pageSize) - 1, totalResults);
 
   return (
     <motion.div
@@ -59,6 +65,12 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
+      {hasIncompletePage && (
+        <div className="text-sm text-yellow-600 dark:text-yellow-400 bg-yellow-100 dark:bg-yellow-900 px-3 py-1 rounded">
+          Showing {currentArticlesCount} of {expectedArticles} expected articles (API limitation)
+        </div>
+      )}
+
       <div className="flex items-center gap-2">
         <motion.button
           onClick={() => onPageChange(currentPage - 1)}
@@ -95,7 +107,8 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalResults, page
         </motion.button>
       </div>
       <div className={`pgs ${theme === "dark" ? "text-gray-600" : "text-gray-400"}`}>
-        Showing {startResult} of {totalResults} results
+        Showing {startResult}-{endResult} of {totalResults} results
+        {hasIncompletePage && " (limited by API)"}
       </div>
     </motion.div>
   )

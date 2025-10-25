@@ -17,9 +17,11 @@ export const newsApi = {
     const data = await res.json();
 
     if (data.status === "ok") {
+      const articles = data.articles || [];
+      const totalResults = data.totalResults || 0;
       return {
-        articles: data.articles || [],
-        totalResults: data.totalResults || 0
+        articles: articles,
+        totalResults: totalResults
       };
     } else {
       throw new Error(data.message || "Failed to fetch news");

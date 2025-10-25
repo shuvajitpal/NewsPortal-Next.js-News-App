@@ -78,6 +78,7 @@ export default function HomePage() {
             totalResults={totalResults}
             pageSize={9}
             onPageChange={handlePageChange}
+            currentArticlesCount={articles.length}
           />
       )}
     </motion.div>
